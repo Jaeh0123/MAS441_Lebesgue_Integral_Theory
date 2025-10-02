@@ -1,5 +1,5 @@
 # MAS441_Lebesgue_Integral_Theory
 
-This is for the **MAS441_Lebesgue Intergral Theory** course in KAIST.
+This is a Lecture note for the **MAS441_Lebesgue Intergral Theory** course in KAIST.
 
-The metarials are based on ''Real Analysis''(by Stein).
+The materials are based on ''_Real Analysis_'' by Stein.
