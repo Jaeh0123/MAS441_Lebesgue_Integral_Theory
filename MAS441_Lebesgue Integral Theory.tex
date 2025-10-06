@@ -602,9 +602,142 @@ There are some facts and nice properties of exterior measure as follows.
 
 \newpage
 \section{Measurable Sets and the Lebesgue Measure}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.3.1]\label{Definition 1.3.1}
+    A subset $E\subseteq\BR^d$ is said to be \textbf{measurable} if for any $\epsilon>0$, there exists an open set $\mathcal{O}$ containing $E$ such that 
 
+    \[m_*(\mathcal{O}-E)<\epsilon.\]
+    \\
+    Recall that the exterior measure was defined for all subsets of $\BR^d$ in Section 1.2. Now, we define the \textbf{Lebesgue measure}, denoted by $m$, as the restriction of $m_*$ to the collection of all measurable sets. 
+\end{tcolorbox}
+\vspace{5mm}
 
+The above definition clearly implies the following properties:
 
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=brown!75!black,title=Proposition 1.3.1]\label{Proposition 1.3.1}
+    \begin{enumerate}
+        \item [(1)] Every open set $E\subseteq\BR^d$ is measurable.
+        \item [(2)] If $m_*(E)=0$, then $E$ is measurable. 
+        \item [(3)] A countable union of measurable sets is measurable.
+        \item [(4)] Every closed set is measurable.
+        \item [(5)] The complement of a measurable set is measurable.
+        \item [(6)] A countable intersection of measurable sets is measurable.
+    \end{enumerate}
+\end{tcolorbox}
+\begin{proof}
+    (1) Taking $\mathcal{O}=E$ completes the proof.
+
+    \vspace{5mm}
+    (2) By Theorem \hyperref[Theorem 1.2.7]{1.2.7}, since $m_*(E)=0$, for any $\epsilon>0$, there exists an open set $\mathcal{O}$ containing $E$ such that $m_*(\mathcal{O})<\epsilon$. Since we have $\mathcal{O}-E\subseteq\mathcal{O}$, by the monotonicity, 
+
+    \[m_*(\mathcal{O}-E)\leq m_*(\mathcal{O})<\epsilon.\]
+    \\
+    Therefore, $E$ is measurable.
+
+    \vspace{5mm}
+    (3) Let $E=\bigcup_{j=1}^{\infty}{E_j}$ where each $E_j$ is measurable. For any $\epsilon>0$, there exists an open set $\mathcal{O}_j$ containing $E_j$ such that 
+
+    \[m_*(\mathcal{O}_j-E_j)<\frac{\epsilon}{2^j}\]
+    \\
+    for all $j\in\BZ^+$. Let $\mathcal{O}\coloneqq\bigcup_{j=1}^{\infty}{\mathcal{O}_j}$, then $\mathcal{O}$ is an open set containing $E$. Moreover, since 
+
+    \[\mathcal{O}-E\subseteq\bigcup_{j=1}^{\infty}{(\mathcal{O}_j-E_j)},\]
+    \\
+    we have 
+
+    \[m_*(\mathcal{O}-E)\leq \sum_{j=1}^{\infty}{m_*(\mathcal{O}_j-E_j)}<\sum_{j=1}^{\infty}{\frac{\epsilon}{2^j}}=\epsilon.\]
+    \\
+    Therefore, $E$ is also measurable.
+
+    \vspace{5mm}
+    (4) We first claim that any compact set $F\subseteq\BR^d$ is measurable. Let $\mathcal{O}$ be an open set containing $F$ such that $m_*(\mathcal{O}-F)<\epsilon$ so that 
+
+    \[m_*(\mathcal{O})=m_*\big(F\cup(\mathcal{O}-F)\big)\leq m_*(F)+\epsilon.\]
+    \\
+    Since $\mathcal{O}-F$ is open in $\BR^d$, by Theorem \hyperref[Theorem 1.1.4]{1.1.4}, it can be written as a countable union of almost disjoint closed cubes, that is,
+
+    \[\mathcal{O}-F=\bigcup_{j=1}^{\infty}{Q_j}\]
+    \\
+    where $\{Q_j\}_{j=1}^{\infty}$ is a collection of almost disjoint closed cubes. For a fixed $N\in\BZ^+$, let $K\coloneqq\bigcup_{j=1}^{N}{Q_j}$ so that $K$ is compact and $K\cap F=\emptyset$. Therefore, by Lemma \hyperref[Lemma 1.3.2]{1.3.2}, we have $\mathrm{dist}(F,K)>0$. Hence, the Theorem \hyperref[Theorem 1.2.8]{1.2.8} implies that
+
+    \[m_*(\mathcal{O})\geq m_*(F\cup K)=m_*(F)+m_*(K)=m_*(F)+\sum_{j=1}^{N}{m_*(Q_j)}.\]
+    \\
+    Since we have $m_*(\mathcal{O})\leq m_*(F)+\epsilon$, the above inequality implies that 
+
+    \[\sum_{j=1}^{N}{m_*(Q_j)}\leq \epsilon.\]
+    \\
+    Since $N$ is chosen arbitrarily, we have $\sum_{j=1}^{\infty}{m_*(Q_j)}\leq \epsilon$; therefore, 
+
+    \[m_*(\mathcal{O}-F)=\sum_{j=1}^{\infty}{m_*(Q_j)}\leq \epsilon\]
+    \\
+    by Theorem \hyperref[Theorem 1.2.9]{1.2.9}. This proves that $F$ is measurable.
+
+    For the general case that the closed set $F$ is not compact, note that 
+
+    \[F=\bigcup_{k=1}^{\infty}{\left[F\cap [-k,k]^d\right]}\]
+    \\
+    where $F\cap [-k,k]^d$ is compact for all $k\in\BZ^+$. Since $F$ is a countable union of measurable sets, by part (3), it is also measurable.
+
+    \vspace{5mm}
+    (5) Note that, for any $n\in\BZ^+$, there exists an open set $\mathcal{O}_n$ containing $E$ such that 
+
+    \[m_*(\mathcal{O}_n-E)\leq\frac{1}{n}.\]
+    \\
+    Let $S\coloneqq\bigcup_{n=1}^{\infty}{\mathcal{O}_n^c}$, then we have $S\subseteq E^c$. Since each $\mathcal{O}_n^c$ is closed, so is $S$ and this implies that $S$ is measurable by part (4). Note that $E^c-S\subseteq\mathcal{O}_n-E$ holds for all $n$, thus
+    
+    \[m_*(E^c-S)\leq m_*(\mathcal{O}_n-E)\leq\frac{1}{n}.\]
+    \\
+    As $n\rightarrow\infty$, we obtain $m_*(E^c-S)=0$, that is, $E^c-S$ is measurable by part (2). Therefore, we conclude that $E^c$ is also measurable since it is the union of two measurable sets $E^c-S$ and $S$.
+
+    \vspace{5mm}
+    (6) Recall that $\bigcap_{i=1}^{\infty}{E_j}=\left(\bigcup_{j=1}^{\infty}{E_j^c}\right)^c$ and apply the part (3) and (5).
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Lemma 1.3.2]\label{Lemma 1.3.2}
+    If $F\subseteq\BR^d$ is closed, $K\subseteq\BR^d$ is compact, and $F\cap K=\emptyset$, then $\mathrm{dist}(F,K)>0$.
+\end{tcolorbox}
+\vspace{5mm}
+\begin{proof}
+    Pick any $x\in K$. Since $x\in F$ and $F$ is closed, there exists $\delta_x>0$ such that $B_d(x,\delta_x)\subseteq F^c$ so that $\mathrm{dist}(x,F)\geq\delta_x$. Let 
+
+    \[\mathcal{C}=\big\{B_d\left(x,\delta_x/2\right)\mid x\in K\big\}\]
+    \\
+    then $\mathcal{C}$ is an open covering of $K$. Since $K$ is compact, we can find some finite subcover of $\mathcal{C}$, that is, there exists $x_1,\dots, x_N\in K$ such that $\{B_d(x_i,\delta_{x_i}/2)\}_{i=1}^{N}$ covers $K$. Let 
+
+    \[\delta\coloneqq\min\left\{\frac{\delta_{x_i}}{2}\ \Big|\ 1\leq i\leq N\right\}.\]
+    \\
+    Then, for any $x\in K$, there exists $i\in\{1,\dots,N\}$ such that $x\in B_d(x_i, \delta_{x_i}/2)$; hence, for any $y\in F$, we can obtain
+
+    \[d(y,x)\geq d(y,x_i)-d(x_i,x)\geq 2\delta-\delta=\delta>0.\]
+    \\
+    Therefore, we conclude that 
+
+    \[d(F,K)=\inf_{\substack{x\in K\\ y\in F}}{d(y,x)}\geq\delta>0.\]
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.3.3]\label{Theorem 1.3.3}
+    If $\{E_j\}_{j=1}^{\infty}$ are disjoint measurable sets, then their union is measurable and
+
+    \[m\left(\bigcup_{j=1}^{\infty}{E_j}\right)=\sum_{j=1}^{\infty}{m(E_j)}.\]
+\end{tcolorbox}
+\begin{proof}
+    Note that the union is measurable by Proposition \hyperref[Proposition 1.3.1]{1.3.1} and 
+    
+    \[m\left(\bigcup_{j=1}^{\infty}{E_j}\right)\leq\sum_{j=1}^{\infty}{m(E_j)}\]
+    \\
+    by countable subadditivity. We now claim that the opposite inclusion also holds.
+    
+    
+    
+    We first prove the claim for the case when each $E_j$ is bounded so that $m_*(E_j)<\infty$. Since each $E_j$ is measurable, so is $E_j^c$. Hence, for any $\epsilon>0$, there exists an open set $\mathcal{O}_j$ containing $E_j^c$ such that 
+
+    \[m_*(\mathcal{O}_j-E_j^c)<\frac{\epsilon}{2^j}.\]
+    \\
+    Since $\mathcal{O}_j^c$ is a closed set contained in $E_j$ with $m_*(E_j-\mathcal{O}_j^c)<\epsilon/2^j$, Thus
+    
+    \[m_*(E_j)\leq m_*(\mathcal{O}_j^c)+m_*(E_j-\mathcal{O}_j^c)\leq m_*(\mathcal{O}_j^c)+\frac{\epsilon}{2^j}.\]
+\end{proof}
 
 
 
