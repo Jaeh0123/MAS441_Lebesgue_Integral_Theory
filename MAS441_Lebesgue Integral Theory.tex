@@ -24,6 +24,7 @@
 \usepackage{tikz-cd}
 \usepackage{extpfeil}
 \usepackage{etoolbox}
+\usepackage{bm}
 \usepackage[pdfpagelabels,hyperindex,colorlinks=true, linkcolor=blue, citecolor=red, urlcolor=magenta, filecolor=cyan]{hyperref}
 
 
@@ -728,8 +729,6 @@ The above definition clearly implies the following properties:
     \\
     by countable subadditivity. We now claim that the opposite inclusion also holds.
     
-    
-    
     We first prove the claim for the case when each $E_j$ is bounded so that $m_*(E_j)<\infty$. Since each $E_j$ is measurable, so is $E_j^c$. Hence, for any $\epsilon>0$, there exists an open set $\mathcal{O}_j$ containing $E_j^c$ such that 
 
     \[m_*(\mathcal{O}_j-E_j^c)<\frac{\epsilon}{2^j}.\]
@@ -737,12 +736,391 @@ The above definition clearly implies the following properties:
     Since $\mathcal{O}_j^c$ is a closed set contained in $E_j$ with $m_*(E_j-\mathcal{O}_j^c)<\epsilon/2^j$, Thus
     
     \[m_*(E_j)\leq m_*(\mathcal{O}_j^c)+m_*(E_j-\mathcal{O}_j^c)\leq m_*(\mathcal{O}_j^c)+\frac{\epsilon}{2^j}.\]
+    \\
+    Pick some $N$. Since $\mathcal{O}_1^c,\dots,\mathcal{O}_N^c$ are disjoint and compact, they are all separated. Then 
+
+    \[m_*\left(\bigcup_{j=1}^{\infty}{E_j}\right)\geq m_*\left(\bigcup_{j=1}^{N}{\mathcal{O}_j^c}\right)=\sum_{j=1}^{N}{m_*(\mathcal{O}_j^c)}\geq\sum_{j=1}^{N}{\left(m_*(E_j)-\frac{\epsilon}{2^j}\right)}.\]
+    \\
+    Thus we have 
+
+    \[m_*\left(\bigcup_{j=1}^{\infty}{E_j}\right)\geq \sum_{j=1}^{N}{m_*(E_j)}-\epsilon.\]
+    \\
+    Letting $N\rightarrow\infty$, since $\epsilon>0$ is chosen arbitrarily, we conclude that 
+
+    \[m\left(\bigcup_{j=1}^{\infty}{E_j}\right)\geq \sum_{j=1}^{\infty}{m(E_j)}.\]
+    \\
+    Therefore, the theorem holds in this case.
+
+    \indent For the general case, let $Q_k\coloneqq [-k,k]^d$ and $S_k\coloneqq Q_k-Q_{k-1}$ with $S_1=Q_1$. By taking the collection of $E_{j,k}\coloneqq E_j\cap S_k$ which is bounded, we have 
+
+    \[\bigcup_{j=1}^{\infty}{E_j}=\bigcup_{j,k}{E_{j,k}}.\]
+    \\
+    Since $E_{j,k}$'s are disjoint measurable, by the above result, we have 
+
+    \[m\left(\bigcup_{j=1}^{\infty}{E_j}\right)=\sum_{j,k}{m(E_{j,k})}=\sum_{j=1}^{\infty}{m(E_j)}\]
+    \\
+    because $E_j=\bigcup_{k=1}^{\infty}{E_{j,k}}$ for all $j$.  
 \end{proof}
+\vspace{5mm}
+
+We now introduce the following notation:
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.3.2]\label{Definition 1.3.2}
+    Let $\{E_j\}_{j=1}^{\infty}$ be a collection of subsets of $\BR^d$.
+    \begin{enumerate}
+        \item [(1)] We write $E_j\nearrow E$ if $E_k\subseteq E_{k+1}$ for all $k\in\BZ^+$ and $E=\bigcup_{j=1}^{\infty}{E_j}$.
+        \item [(2)] We write $E_j\searrow E$ if $E_k\supseteq E_{k+1}$ for all $k\in\BZ^+$ and $E=\bigcap_{j=1}^{\infty}{E_j}$.
+    \end{enumerate}
+\end{tcolorbox}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Corollary 1.3.4]\label{Corollary 1.3.4}
+    Let $\{E_j\}_{j=1}^{\infty}$ be a collection of measurable sets in $\BR^d$.
+    \begin{enumerate}
+        \item [(1)] If $E_j\nearrow E$, then $m(E)=\lim_{n\rightarrow\infty}{m(E_n)}$.
+        \item [(2)] If $E_j\searrow E$ and $m(E_1)<\infty$, then $m(E)=\lim_{n\rightarrow\infty}{m(E_n)}$.
+    \end{enumerate}
+\end{tcolorbox}
+\begin{proof}
+    (1) Let $G_1\coloneqq E_1$ and $G_k\coloneqq E_k-E_{k-1}$ for all $k\geq 2$. Then $E=\bigcup_{k=1}^{\infty}{G_k}$ where $\{G_k\}_{k=1}^{\infty}$ are disjoint measurable sets in $\BR^d$. Therefore, by Theorem \hyperref[Theorem 1.3.3]{1.3.3}, we have
+
+    \[m(E)=\sum_{k=1}^{\infty}{m(G_k)}=\lim_{n\rightarrow\infty}{\sum_{k=1}^{n}{m(G_k)}}.\]
+    \\
+    Note that $\sum_{k=1}^{n}{m(G_k)}=m(E_n)$ since $E_n=\bigcup_{k=1}^{n}{G_k}$; therefore, we have
+
+    \[m(E)=\lim_{n\rightarrow\infty}{m(E_n)}.\]
+
+    \vspace{5mm}
+    (2) Similarly, let $G_k\coloneqq E_k-E_{k+1}$ for all $k\in\BZ^+$. Then each $G_k$ is measurable, and
+
+    \[E_1=E\cup\left(\bigcup_{k=1}^{\infty}{G_k}\right).\]
+    Hence we have 
+    \[m(E_1)=m(E)+\lim_{n\rightarrow\infty}{\sum_{k=1}^{n-1}{m(G_k)}},\]
+    \\
+    and since $E_1-E_n=\bigcup_{k=1}^{n}{G_k}$ implies that $\sum_{k=1}^{n-1}{m(G_k)}=m(E_1)-m(E_n)$, thus
+
+    \[m(E_1)=m(E)+m(E_1)-\lim_{n\rightarrow\infty}{m(E_n)}.\]
+    \\
+    Here, since $m(E_1)<\infty$, we can conclude that 
+
+    \[m(E)=\lim_{n\rightarrow\infty}{m(E_n)}.\]
+    \\
+    This completes the proof.
+\end{proof}
+\vspace{5mm}
+
+Note that if we drop the condition $m(E_1)<\infty$, then the conclusion of part (2) may not hold. Such an example is as following: Let $E_k=(k,\infty)$ for all $k\in\BZ^+$. Then $E_k\searrow\emptyset$ but $m(E_k)=\infty$ whereas $m(\emptyset)=0$.
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.3.5]\label{Theorem 1.3.5}
+    Let $E$ be a measurable set in $\BR^d$. Then, for any $\epsilon>0$, 
+    \begin{enumerate}
+        \item [(1)] there exists an open set $\mathcal{O}\supseteq E$ such that $m(\mathcal{O}-E)\leq\epsilon$.
+        \item [(2)] there exists a closed set $F\subseteq E$ such that $m(E-F)\leq\epsilon$.
+        \item [(3)] if $m(E)<\infty$, then there exists a compact set $K\subseteq E$ such that $m(E-K)\leq\epsilon$.
+        \item [(4)] if $m(E)<\infty$, then there exists $F=\bigcup_{j=1}^{N}{Q_j}$ such that $m(E\triangle F)\leq \epsilon$ where $\{Q_j\}_{j=1}^{N}$ are closed cubes which are not necessarily disjoint. 
+    \end{enumerate}
+\end{tcolorbox}
+\begin{proof}
+    Note that (1) and (2) are clear by the definition of measurability.
+
+    \vspace{5mm}
+    (3) Take a closed set $F\subseteq E$ such that $m(E-F)\leq\epsilon/2$. Let 
+
+    \[K_n\coloneqq F\cap [-n,n]^d\]
+    \\
+    for all $n\in\BZ^+$, then they are all compact. Since $(E-K_n)\searrow (E-F)$ and $m(E)<\infty$, by Corollary \hyperref[Corollary 1.3.4]{1.3.4}, we have 
+
+    \[\lim_{n\rightarrow\infty}{m(E-K_n)}=m(E-F)\leq\frac{\epsilon}{2}.\]
+    \\
+    Hence, we conclude that $m(E-K_N)\leq \epsilon$ for sufficiently large $N$.
+
+    \vspace{5mm}
+    (4) Let $\{Q_j\}_{j=1}^{\infty}$ be a covering of $E$ by closed cubes such that 
+
+    \[\sum_{j=1}^{\infty}{|Q_j|}\leq m(E)+\frac{\epsilon}{2}.\]
+    \\
+    Take some large $N$ so that $\sum_{j=N+1}^{\infty}{|Q_j|}<\frac{\epsilon}{2}$. Let $F\coloneqq\sum_{j=1}^{N}{Q_j}$, then
+
+    \begin{align*}
+        m(E\triangle F) &= m(E-F) + m(F-E)\\
+        &\leq m\left(\bigcup_{j=N+1}^{\infty}{Q_j}\right)+m\left(\bigcup_{j=1}^{\infty}{Q_j}-E\right)\\
+        &\leq \sum_{j=N+1}^{\infty}{|Q_j|}+\left[m\left(\bigcup_{j=1}^{\infty}{Q_j}\right)-m(E)\right]\\
+        &\leq \frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
+    \end{align*}
+    \\
+    This completes the proof.
+\end{proof}
+\vspace{5mm}
+
+The Lebesgue measure has some properties called \textbf{translation-invariance}, \textbf{relative dilation-invariance}, and \textbf{reflection-invariant}. Each of them is as following:
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=brown!75!black,title=Proposition 1.3.6]\label{Proposition 1.3.6}
+    Let $E$ be a measurable set in $\BR^d$.
+    \begin{enumerate}
+        \item [(1)] If $h\in\BR^d$, then $E+h$ is measurable and $m(E+h)=m(E)$.
+        \item [(2)] If $\delta>0$, then $\delta E$ is measurable and $m(\delta E)=\delta^d m(E)$.
+        \item [(3)] Then $-E$ is measurable and $m(-E)=m(E)$.
+        \item [(4)] If $L$ is a linear transformations of $\BR^d$ to $\BR^d$, then $L(E)$ is measurable and 
+        \[m(L(E))=|\det{(L)}|m(E).\]
+    \end{enumerate}
+\end{tcolorbox}
+\begin{proof}
+    (1) Recall that the exterior measure is invariant under the translation. (It is obvious from the definition.) Since $E$ is measurable, there exists an open set $\mathcal{O}\supseteq E$ such that $m_*(\mathcal{O}-E)<\epsilon$. Then, $\mathcal{O}+h$ is open and $\mathcal{O}+h\supseteq E+h$. Therefore, we have 
+
+    \[m_*\big((\mathcal{O}+h)-(E+h)\big)=m_*\big((\mathcal{O}-E)+h\big)=m_*(\mathcal{O}-E)<\epsilon.\]
+    \\
+    This proves that $E+h$ is measurable and $m(E+h)=m(E)$.
+
+    \vspace{5mm}
+    (2) 
+
+    \vspace{5mm}
+    (3) 
+
+    \vspace{5mm}
+    (4)
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.3.3]\label{Definition 1.3.3}
+    A collection of subsets of $\BR^d$ is called \textbf{$\sigma$-algebra} if it is closed under countable unions, countable intersections, and complements.
+\end{tcolorbox}
+\vspace{5mm}
+
+For example, $\mathcal{P}(\BR^d)$ is a $\sigma$-algebra since it is closed under countable unions, countable intersections, and complements. Similarly, the collection of all measurable sets in $\BR^d$ is of course a $\sigma$-algebra.
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.3.4]\label{Definition 1.3.4}
+    The \textbf{Borel $\sigma$-algebra} in $\BR^d$, denoted by $\mathcal{B}_{\BR^d}$ is the smallest $\sigma$-algebra containing all open sets in $\BR^d$. Every element of the Borel $\sigma$-algebra is called the \textbf{Borel set}.
+\end{tcolorbox}
+
+\vspace{5mm}
+It is easy to check that arbitrary intersection $\sigma$-algebras is again a $\sigma$-algebra. Therefore, we can define $\mathcal{B}_{\BR^d}$ as the intersection of all $\sigma$-algebras containing all open sets in $\BR^d$. This proves the existence and uniqueness of the Borel $\sigma$-algebra.
+
+Since the collection of measurable sets is $\sigma$-algebra containing all open sets in $\BR^d$, the Borel $\sigma$-algebra is contained in it. Note that the inclusion is strict.
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.3.5]\label{Definition 1.3.5}
+    \begin{enumerate}
+        \item [(1)] A countable intersection of open sets is called the $\bm{G_\delta}$ \textbf{set}.
+        \item [(2)] A countable union of closed sets is called the $\bm{F_\sigma}$ \textbf{set}.
+    \end{enumerate}
+\end{tcolorbox}
+\vspace{5mm}
+Recall that, for any two sets $A$ and $B$, the set $A\triangle B$ is defined to be 
+
+\[A\triangle B=(A\setminus B)\cup (B\setminus A).\]
+\[\]
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.3.7]\label{Theorem 1.3.7}
+    A subset $E$ of $\BR^d$ is measurable 
+    \begin{enumerate}
+        \item [(1)] if and only if there exists $G_\delta$ set $G$ such that $m(E\triangle G)=0$.
+        \item [(2)] if and only if there exists $F_\sigma$ set $F$ such that $m(E\triangle F)=0$.
+    \end{enumerate}
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.3.8]\label{Theorem 1.3.8}
+    There exists a non-measurable set.
+\end{tcolorbox}
+\begin{proof}
+    Define a relation $\sim$ on $[0,1]$ by $x\sim y$ if $x-y\in\BQ$. Then the relation $\sim$ is an equivalence relation on $[0,1]$. Let $\{\mathcal{E}_\alpha\}_{\alpha\in\mathcal{A}}$ denotes the equivalence classes so that
+
+    \[[0,1]=\bigcup_{\alpha\in\mathcal{A}}{\mathcal{E}_\alpha}.\]
+    \\
+    Pick arbitrary representative $x_\alpha$ from $\mathcal{E}_\alpha$, for each $\alpha\in\mathcal{A}$. Let 
+
+    \[\mathcal{N}\coloneqq\bigcup_{\alpha\in\mathcal{A}}{\{x_\alpha\}}.\]
+    \\
+    (Such a construction is possible because of the ``\textbf{axiom of choice}''.) We now claim that $\mathcal{N}$ is not measurable.
+
+    Let $\{r_k\}_{k=1}^{\infty}$ denote arbitrary enumeration of $\BQ\cap [-1,1]$. Then 
+    
+    \[[0,1]\subseteq \bigcup_{k=1}^{\infty}{(\mathcal{N}+r_k)}\subseteq [-1,2]\]
+    \\
+    where the sets $\mathcal{N}+r_k$ are all disjoint. If $\mathcal{N}$ is measurable, then so is $\mathcal{N}+r_k$; thus
+
+    \[m([0,1])\leq \sum_{k=1}^{\infty}{m(\mathcal{N}+r_k)}\leq m([-1,2]).\]
+    \\
+    Since $m(\mathcal{N}+r_k)=m(\mathcal{N})$ for all $k$, we have 
+
+    \[-1\leq \sum_{k=1}^{\infty}{m(\mathcal{N})}\leq 3\]
+    \\
+    which is a contradiction. Therefore, $\mathcal{N}$ is not measurable.
+\end{proof}
+\vspace{5mm}
+
+The set $\mathcal{N}$ defined above is called a \textbf{Vitali set}. Note that the set is not unique, since it depends on the choice of representatives $x_\alpha$ from each equivalence class $\mathcal{E}_\alpha$.
+
 
 
 
 \newpage
 \section{Measurable Functions}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.4.1]\label{Definition 1.4.1}
+    Let $E$ be a subset of $\BR^d$. The \textbf{characteristic function} of $E$ is 
+
+    \[\chi_{E}(x)\coloneqq\begin{cases}
+        1 & \text{if $x\in E$},\\
+        0 & \text{if $x\notin E$}.
+    \end{cases}\]
+\end{tcolorbox}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.4.2]\label{Definition 1.4.2}
+    A \textbf{simple function} is defined as a finite linear combination 
+
+    \[f=\sum_{k=1}^{N}{a_k\chi_{E_k}}\]
+    \\
+    where each $E_k$ is a measurable set of finite measurable.
+\end{tcolorbox}
+\vspace{5mm}
+
+Let $f:\BR^d\rightarrow \BR\cup\{\pm\infty\}$ and assume
+
+\[m(\{x\in\BR^d \mid f(x)=\pm\infty\})=0.\]
+\\
+Then we define the ``measurable functions'' as following:
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.4.3]\label{Definition 1.4.3}
+    A function $f$ is called the \textbf{measurable function} if the level set 
+
+    \[f^{-1}([-\infty,a))=\{x\in \BR^d \mid f(x)<a\}\]
+    \\
+    is measurable for all $a\in\BR$.
+\end{tcolorbox}
+\vspace{5mm}
+
+In fact, the definition remains equivalent even if we use $f^{-1}([-\infty,a])$, or $f^{-1}((a,\infty])$, or $f^{-1}([a,\infty])$ instead of $f^{-1}([-\infty,a))$. For instance, since we have
+
+\[\{f\leq a\}=\bigcap_{k=1}^{\infty}{\{f<a+1/k\}}\]
+and 
+\[\{f<a\}=\bigcup_{k=1}^{\infty}{\{f\leq a-1/k\}}\]
+\\
+the definition using $f^{-1}([-\infty,a])$ is equivalent to the original definition. 
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.1]\label{Theorem 1.4.1}
+    Let $f$ be a finite-value function, then the following are equivalent:
+    \begin{enumerate}
+        \item [(1)] $f$ is measurable.
+        \item [(2)] $f^{-1}(\mathcal{O})$ is measurable for every open set $\mathcal{O}$ in $\BR$.
+        \item [(3)] $f^{-1}(F)$ is measurable for evey closed set $F$ in $\BR$.
+    \end{enumerate}
+\end{tcolorbox}
+\begin{proof}
+    (1)
+
+    \vspace{5mm}
+    (2)
+
+    \vspace{5mm}
+    (3)
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Corollary 1.4.2]\label{Corollary 1.4.2}
+    If $f$ is a continuous function, then it is measurable.
+\end{tcolorbox}
+\begin{proof}
+    Since $f$ is continuous, for every open set $\mathcal{O}$ in $\BR$, $f^{-1}(\mathcal{O})$ is open in $\BR^d$. Since every open set is measurable, by Theorem \hyperref[Theorem 1.4.1]{1.4.1}, $f$ is measurable.
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Corollary 1.4.3]\label{Corollary 1.4.3}
+    If $f:\BR^d\rightarrow\BR$ is measurable and $g:\BR\rightarrow\BR$ is continuous, then $g\circ f$ is measurable.
+\end{tcolorbox}
+\begin{proof}
+    Let $\mathcal{O}$ be an open set in $\BR$, then 
+
+    \[(g\circ f)^{-1}(\mathcal{O})=f^{-1}(g^{-1}(\mathcal{O})).\]
+    \\
+    Since $g$ is continuous, $g^{-1}(\mathcal{O})$ is open in $\BR$; hence, the set $f^{-1}(g^{-1}(\mathcal{O}))$ is measurable by Theorem \hyperref[Theorem 1.4.1]{1.4.1}. This proves that $g\circ f$ is measurable.
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.4]\label{Theorem 1.4.4}
+    Let $\{f_n\}_{n=1}^{\infty}$ be a sequence of measurable functions, then $\sup{f_n}$, $\inf{f_n}$, $\limsup{f_n}$, and $\liminf{f_n}$ are all measurable.
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.5]\label{Theorem 1.4.5}
+    Let $\{f_n\}_{n=1}^{\infty}$ be a sequence of measurable functions such that 
+    
+    \[\lim_{n\rightarrow\infty}{f_n(x)}=f(x)\]
+    \\
+    exists for all $x\in\BR^d$. Then $f$ is a measurable function.
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.6]\label{Theorem 1.4.6}
+    If $f$ and $g$ are two measurable functions, then $f+g$ and $fg$ are also measurable.
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.4.4]\label{Definition 1.4.4}
+    Let $E$ be a measurable set in $\BR^d$ and let $f,g:E\rightarrow\BR$ be two measurable functions on $E$. We say that $f$ and $g$ are equal \textbf{almost everywhere} if 
+
+    \[m(\{x\in E\mid f(x)\neq g(x)\})=0.\]
+    \\
+    We simply write $f(x)=g(x)$ a.e. $x\in E$.
+\end{tcolorbox}
+\vspace{5mm}
+
+Note that the collection of all measurable functions is very large. It contains not only characteristic functions, but also simple and continuous functions. We now introduce several ways to approximate measurable functions by nicer functions, namely simple functions, step functions, and continuous functions.
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.7]\label{Theorem 1.4.7}
+    If $f$ is a nonnegative measurable function on $\BR^d$, there exists an increasing sequence of nonnegative simple functions $\{\varphi_n\}_{n=1}^{\infty}$ such that each $\supp(\varphi_n)$ is compact,
+
+    \[\varphi_{n}(x)\leq \varphi_{n+1}(x)\quad\text{and}\quad \lim_{n\rightarrow\infty}{\varphi_n(x)}=f(x)\]
+    \\
+    for all $x\in\BR^d$.
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.8]\label{Theorem 1.4.8}
+    Let $f$ be a measurable function on $\BR^d$. Then there exists a sequence of simple functions $\{\varphi_n\}_{n=1}^{\infty}$ such that 
+
+    \[\lim_{n\rightarrow\infty}{\varphi_n(x)}=f(x)\quad\text{for all}\quad x\in\BR^d.\]
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.9 (Egorov Theorem)]\label{Theorem 1.4.9}
+    Let $\{f_k\}_{k=1}^{\infty}$ be a sequence of measurable functions defined on a measurable set $E$ with $m(E)<\infty$. If $f_k\rightarrow f$ a.e., then for any $\epsilon>0$, there exist a closed set $A\subseteq E$ such that $m(E-A)<\epsilon$ and $f_k\rightrightarrows f$ on $A$ (i.e. $f_k$ converges to $f$ uniformly on $A$).
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.4.5]\label{Definition 1.4.5}
+    We say that $\boldsymbol{f_k\rightarrow f}$ \textbf{almost everywhere (a.e)} if $f_k\rightarrow f$ pointwise except on a set of measure zero.
+\end{tcolorbox}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.4.6]\label{Definition 1.4.6}
+    A \textbf{step function} is defined as a finite linear combination
+
+    \[f=\sum_{k=1}^{N}{a_k\chi_{I_k}}\]
+    \\
+    where the sets $\{I_k\}$ are disjoint closed rectangles in $\BR^d$.
+\end{tcolorbox}
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.10]\label{Theorem 1.4.10}
+    If $f$ is a measurable function on $\BR^d$, then there exists a sequence of step functions $\{\varphi_n\}_{n=1}^{\infty}$ such that $\varphi_n\rightarrow f$ a.e. 
+\end{tcolorbox}
+\begin{proof}
+    
+\end{proof}
+
 
 \newpage
 
@@ -752,7 +1130,6 @@ The above definition clearly implies the following properties:
 \section{The Lebesgue Integral: Basic Properties and Convergence Theorems}
 \section{The Space $L^1$ of Integrable Functions}
 \section{Fubini's theorem}
-\section{A Fourier Inversion Formula}
 
 \newpage
 
