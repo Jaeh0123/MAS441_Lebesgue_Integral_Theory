@@ -331,7 +331,7 @@ By removing certain pathological sets, we can define a function $m$ which satisf
 \vspace{5mm}
 \section{Preliminaries}\mbox{}
 
-Recall that the collection $\{E_\alpha\}_{\alpha\in\mathcal{A}}$ of subsets in $\BR^d$ is said to be ``disjoint'' if $E_\alpha\cap E_\beta=\emptyset$ whenver $\alpha\neq\beta$. We define the slightly weaker concept ``almost disjoint'' as follows:
+Recall that the collection $\{E_\alpha\}_{\alpha\in\mathcal{A}}$ of subsets in $\BR^d$ is said to be ``disjoint'' if $E_\alpha\cap E_\beta=\emptyset$ whenever $\alpha\neq\beta$. We define the slightly weaker concept ``almost disjoint'' as follows:
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.1.1]\label{Definition 1.1.1}
@@ -356,7 +356,7 @@ where $a_j\leq b_j$ for all $1\leq j\leq d$. The \textbf{volume} of the rectangl
     \[|R|=\sum_{k=1}^{N}{|R_k|}.\]
 \end{tcolorbox}
 \begin{proof}
-    Consider the grid formed by extending the sides of all rectangles $R_1,\dots, R_N$. This gives finitely many samller rectangles $\tilde{R}_1,\dots,\tilde{R}_M$ (they are also almost disjoint), and there exists a partition $J_1,\dots, J_N$ of integers between $1$ and $M$ such that
+    Consider the grid formed by extending the sides of all rectangles $R_1,\dots, R_N$. This gives finitely many smaller rectangles $\tilde{R}_1,\dots,\tilde{R}_M$ (they are also almost disjoint), and there exists a partition $J_1,\dots, J_N$ of integers between $1$ and $M$ such that
 
     \[R=\bigcup_{j=1}^{M}{\tilde{R}_j}\quad\text{and}\quad R_k=\bigcup_{j\in J_k}{\tilde{R}_j}\quad\text{for}\quad 1\leq k\leq M.\]
     \\
@@ -482,7 +482,7 @@ There are some facts and nice properties of exterior measure as follows.
     (Omitted).
 \end{proof}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=brown!75!black,title=Proposition 1.2.3]\label{Proposition 1.2.3}
-    The exterior measure of $\BR^d$ is infinte, i.e., $m_*(\BR^d)=\infty$.
+    The exterior measure of $\BR^d$ is infinite, i.e., $m_*(\BR^d)=\infty$.
 \end{tcolorbox}
 \begin{proof}
     Note that any covering $\{Q_j\}_{j=1}^{\infty}$ of $\BR^d$ also covers any closed cube $Q$ in $\BR^d$ so that
@@ -873,13 +873,41 @@ The Lebesgue measure has some properties called \textbf{translation-invariance},
     This proves that $E+h$ is measurable and $m(E+h)=m(E)$.
 
     \vspace{5mm}
-    (2) 
+    (2) For given $\epsilon>0$, let $\{Q_j\}_{j=1}^{\infty}$ be a covering of $E$ by closed cubes such that 
+
+    \[\sum_{j=1}^{\infty}{|Q_j|}\leq m_*(E)+\frac{\epsilon}{\delta^d}.\]
+    \\
+    Then $\{\delta Q_j\}_{j=1}^{\infty}$ is a covering of $\delta E$ so that 
+
+    \[m_*(\delta E)\leq \sum_{j=1}^{\infty}{|\delta Q_j|}=\delta^d\sum_{j=1}^{\infty}{|Q_j|}\leq \delta^d m_*(E)+\epsilon.\]
+    \\
+    Since $\epsilon>0$ is arbitrarily chosen, the above inequality implies that $m_*(\delta E)\leq \delta^d m_*(E)$. 
+
+    Conversely, applying the above result to $\delta E$ with replacing $\delta$ by $1/\delta$ gives 
+
+    \[m_*\left(\frac{1}{\delta}(\delta E)\right)\leq\frac{1}{\delta^d}m_*(\delta E)\]
+    \\
+    so that $\delta^d m_*(E)\leq m_*(\delta E)$. Therefore, we have $m_*(\delta E)=\delta^d m_*(E)$.
+
+    Using this property, one can prove that $\delta E$ is measurable. The fact that $E$ is measurable implies that there exists an open set $\mathcal{O}$ containing $E$ such that $m_*(\mathcal{O}-E)<\epsilon/\delta^d$. Since $\delta \mathcal{O}$ is an open st containing $\delta E$, we have 
+
+    \[m_*(\delta\mathcal{O}-\delta E)=\delta^d m_*(\mathcal{O}-E)<\epsilon.\]
+    \\
+    This proves that $\delta E$ is measurable and $m(\delta E)=\delta^d m(E)$.
 
     \vspace{5mm}
-    (3) 
+    (3) It is easy to check that $-E$ is measurable. For given $\epsilon>0$, let $\{Q_j\}_{j=1}^\infty$ be a covering of $E$ by closed cubes such that 
+
+    \[\sum_{j=1}^{\infty}{|Q_j|}\leq m(E)+\epsilon.\]
+    \\
+    Then $\{-Q_j\}_{j=1}^{\infty}$ is a covering of $-E$ so that 
+
+    \[m(-E)\leq\sum_{j=1}^{\infty}{|-Q_j|}=\sum_{j=1}^{\infty}{|Q_j|}\leq m(E)+\epsilon.\]
+    \\
+    Since $\epsilon>0$ is arbitrarily chosen, the above inequality implies that $m(-E)\leq m(E)$. By replacing $E$ by $-E$, we conclude that $m(-E)=m(E)$.
 
     \vspace{5mm}
-    (4)
+    (4) (Omitted).
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.3.3]\label{Definition 1.3.3}
@@ -918,7 +946,17 @@ Recall that, for any two sets $A$ and $B$, the set $A\triangle B$ is defined to 
     \end{enumerate}
 \end{tcolorbox}
 \begin{proof}
+    Note that $E$ is measurable if either (1) or (2) is satisfied.
+
+    \vspace{5mm}
+    (1) Since $E$ is measurable, for each $n$, there exists an open set $\mathcal{O}_n$ containing $E$ such that $m(\mathcal{O}_n-E)<1/n$. Let $G\coloneqq\bigcap_{j=1}^{\infty}{\mathcal{O}_n}$, then it is a $G_\delta$ set containing $E$. Moreover, 
+
+    \[G-E_n\subseteq \mathcal{O}_n-E\quad\Longrightarrow\quad m(G-E)\leq m(\mathcal{O}_n-E)\leq\frac{1}{n}\]
+    \\
+    for all $n\in\BZ^+$. Therefore, we conclude that $m(G-E)=0$.
     
+    \vspace{5mm}
+    (2) One can do the same by finding a sequence of closed sets $F_n$ contained in $E$ with $m(E-F_n)<1/n$, and let $F\coloneqq\bigcup_{j=1}^{\infty}{F_n}$. Then we have $m(E-F)=0$.
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.3.8]\label{Theorem 1.3.8}
@@ -1007,17 +1045,29 @@ the definition using $f^{-1}([-\infty,a])$ is equivalent to the original definit
     \begin{enumerate}
         \item [(1)] $f$ is measurable.
         \item [(2)] $f^{-1}(\mathcal{O})$ is measurable for every open set $\mathcal{O}$ in $\BR$.
-        \item [(3)] $f^{-1}(F)$ is measurable for evey closed set $F$ in $\BR$.
+        \item [(3)] $f^{-1}(F)$ is measurable for every closed set $F$ in $\BR$.
     \end{enumerate}
 \end{tcolorbox}
 \begin{proof}
-    (1)
+    (1) $\Rightarrow$ (2). By Theorem \hyperref[Theorem 1.1.3]{1.1.3}, we have $\mathcal{O}=\bigcup_{n=1}^{\infty}{(a_n,b_n)}$. Since
+
+    \[f^{-1}\big((a_n,b_n)\big)=f^{-1}\big([-\infty,b_n)\big)\setminus f^{-1}\big([-\infty,a_n]\big)\]
+    \\
+    and $f$ is measurable, thus $f^{-1}\big((a_n,b_n)\big)$ is measurable; therefore, $f^{-1}(\mathcal{O})$ is measurable for every open set $\mathcal{O}$ in $\BR$.
 
     \vspace{5mm}
-    (2)
+    (2) $\Rightarrow$ (3). Let $F$ be a closed set in $\BR$ and let $\mathcal{O}\coloneqq\BR-F$ so that it is open. Then $f^{-1}(\mathcal{O})$ is measurable, and since we have
+
+    \[f^{-1}(F)=\BR^d-f^{-1}(\mathcal{O}),\]
+    \\
+    thus $f^{-1}(F)$ is also measurable.
 
     \vspace{5mm}
-    (3)
+    (3) $\Rightarrow$ (1). For any $a\in\BR$, since $[a,\infty]$ is closed in $\BR$, $f^{-1}\big([a,\infty]\big)$ is measurable by the assumption. Then, since we have
+
+    \[f^{-1}\big([-\infty,a)\big)=\BR^d-f^{-1}\big([a,\infty]\big),\]
+    \\
+    it is measurable, that is, $f$ is a measurable function.
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Corollary 1.4.2]\label{Corollary 1.4.2}
@@ -1042,7 +1092,17 @@ the definition using $f^{-1}([-\infty,a])$ is equivalent to the original definit
     Let $\{f_n\}_{n=1}^{\infty}$ be a sequence of measurable functions, then $\sup{f_n}$, $\inf{f_n}$, $\limsup{f_n}$, and $\liminf{f_n}$ are all measurable.
 \end{tcolorbox}
 \begin{proof}
-    
+    Note that, for any $a\in\BR$, 
+
+    \[\{\sup_n{f_n}>a\}=\bigcup_{n=1}^{\infty}{\{f_n>a\}}\quad\text{and}\quad \{\inf_n{f_n}<a\}=\bigcup_{n=1}^{\infty}{\{f_n<a\}}.\]
+    \\
+    Since $\{f_n\}_{n=1}^{\infty}$ is a sequence of measurable functions, so $\{f_n>a\}$ and $\{f_n<a\}$ are measurable sets so that both $\{\sup_n{f_n}>a\}$ and $\{\inf_n{f_n}<a\}$ are measurable. 
+
+    Similarly, one can check that 
+
+    \[\limsup_{n\rightarrow\infty}{f_n}=\inf_{k}{\left\{\sup_{n\geq k}{f_n}\right\}}\quad\text{and}\quad \liminf_{n\rightarrow\infty}{f_n}=\sup_{k}{\left\{\inf_{n\geq k}{f_n}\right\}}\]
+    \\
+    so that they are also measurable, as desired.
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.5]\label{Theorem 1.4.5}
@@ -1053,14 +1113,30 @@ the definition using $f^{-1}([-\infty,a])$ is equivalent to the original definit
     exists for all $x\in\BR^d$. Then $f$ is a measurable function.
 \end{tcolorbox}
 \begin{proof}
-    
+    Since the limit exists, we have
+
+    \[f(x)=\limsup_{n\rightarrow\infty}{f_n}=\liminf_{n\rightarrow\infty}{f_n};\]
+    \\
+    therefore, $f$ is a measurable function, by Theorem \hyperref[Theorem 1.4.4]{1.4.4}
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.6]\label{Theorem 1.4.6}
     If $f$ and $g$ are two measurable functions, then $f+g$ and $fg$ are also measurable.
 \end{tcolorbox}
 \begin{proof}
-    
+    Note that 
+
+    \[\{f+g>a\}=\bigcap_{r\in\BQ}{\Big[\{f>a-r\}\cap \{g>r\}\Big]}\]
+    \\
+    since $\BQ$ is dense in $\BR$. Since $f$ and $g$ is measurable, the right hand side is measurable; therefore, we conclude that $f+g$ is also measurable.
+
+    In order to show that $fg$ is measurable, we first prove that if $h$ is a measurable function, then $h^2$ is also measurable. This is because 
+
+    \[\{h^2<a\}=\{h<\sqrt{a}\}\cap \{h>-\sqrt{a}\}.\]
+    \\
+    From this fact, one can conclude that $fg$ is measurable since
+
+    \[fg=\frac{1}{4}\big[(f+g)^2-(f-g)^2\big].\]
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.4.4]\label{Definition 1.4.4}
@@ -1073,6 +1149,9 @@ the definition using $f^{-1}([-\infty,a])$ is equivalent to the original definit
 \vspace{5mm}
 
 Note that the collection of all measurable functions is very large. It contains not only characteristic functions, but also simple and continuous functions. We now introduce several ways to approximate measurable functions by nicer functions, namely simple functions, step functions, and continuous functions.
+
+\vspace{5mm}
+The following theorem introduces the approximation by simple functions.
 
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.7]\label{Theorem 1.4.7}
@@ -1095,7 +1174,7 @@ Note that the collection of all measurable functions is very large. It contains 
     
 \end{proof}
 \vspace{5mm}
-\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.9 (Egorov Theorem)]\label{Theorem 1.4.9}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.9 (Egorov's Theorem)]\label{Theorem 1.4.9}
     Let $\{f_k\}_{k=1}^{\infty}$ be a sequence of measurable functions defined on a measurable set $E$ with $m(E)<\infty$. If $f_k\rightarrow f$ a.e., then for any $\epsilon>0$, there exist a closed set $A\subseteq E$ such that $m(E-A)<\epsilon$ and $f_k\rightrightarrows f$ on $A$ (i.e. $f_k$ converges to $f$ uniformly on $A$).
 \end{tcolorbox}
 \begin{proof}
@@ -1114,12 +1193,35 @@ Note that the collection of all measurable functions is very large. It contains 
     where the sets $\{I_k\}$ are disjoint closed rectangles in $\BR^d$.
 \end{tcolorbox}
 \vspace{5mm}
+
+As we mentioned before, measurable functions can be approximated by step functions. However, the convergence in this case is slightly weaker than in the case of simple functions.
+
+\vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.10]\label{Theorem 1.4.10}
     If $f$ is a measurable function on $\BR^d$, then there exists a sequence of step functions $\{\varphi_n\}_{n=1}^{\infty}$ such that $\varphi_n\rightarrow f$ a.e. 
 \end{tcolorbox}
 \begin{proof}
     
 \end{proof}
+\vspace{5mm}
+
+The last approximation theorem we introduce is the approximation by continuous functions, and its statement is as follows.
+
+\vspace{5mm}
+\begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.11 (Lusin's Theorem)]\label{Theorem 1.4.11}
+    Let $f$ be a measurable and finite valued function on $E$ with $m(E)<\infty$. For any $\epsilon>0$, there exists a closed $F\subseteq E$ such that $m(E-F)<\epsilon$ and $f|_F$ is continuous.
+\end{tcolorbox}
+\vspace{5mm}
+
+Note that the conclusion of the theorem means that the restriction of $f$ to the set $F$ is continuous. However, it does not imply that the function $f$, defined on $E$, is continuous at the points of $F$. For example, let $f=\chi_{[0,1]}$ on $\BR$ and $F=[0,1]$. Then the restriction $f|_F$ is continuous, but the original function $f$ is not continuous at $1\in F$.
+
+\vspace{5mm}
+\begin{proof}
+    
+\end{proof}
+\vspace{5mm}
+
+Recall that we introduced several approximations of measurable functions: by simple, step, and continuous functions. Approximations by simple functions yield pointwise convergence at every point, whereas approximations by step functions yield convergence only almost everywhere. Furthermore, since continuous functions are much nicer, measurable functions can be approximated by continuous functions after discarding a set of small measure.
 
 
 \newpage
