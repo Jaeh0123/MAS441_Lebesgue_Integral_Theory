@@ -1162,23 +1162,73 @@ The following theorem introduces the approximation by simple functions.
     for all $x\in\BR^d$.
 \end{tcolorbox}
 \begin{proof}
-    
+    Let $N=2^n$ and define a map $F_N:\BR^d\rightarrow\BR$ to be
+
+    \[F_N(x)\coloneqq\begin{cases}
+        f(x) & \text{if $x\in [-N,N]^d$ and $f(x)>N$},\\
+        N & \text{if $x\in [-N,N]^d$ and $f(x)\leq N$},\\
+        0 & \text{otherwise (i.e. $x\notin [-N,N]^d$)}.
+    \end{cases}\]
+    \\
+    For each $0\leq k<N^2$, let 
+
+    \[E_{k,N}=\left\{x\in [-N,N]^d\ \Big|\ \frac{k}{N}<F_N(x)\leq\frac{k+1}{N}\right\}.\]
+    \\
+    Then, we define $\varphi_n:\BR^d\rightarrow\BR$ to be 
+
+    \[\varphi_n=\sum_{k=0}^{N^2-1}{\frac{k}{N}\chi_{E_{k,N}}}\]
+    \\
+    so that it is a simple function of compact support. Moreover, it is clear that $\{\varphi_n\}_{n=1}^{\infty}$ is an increasing sequence that converges to $f$ pointwise.
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.8]\label{Theorem 1.4.8}
     Let $f$ be a measurable function on $\BR^d$. Then there exists a sequence of simple functions $\{\varphi_n\}_{n=1}^{\infty}$ such that 
 
-    \[\lim_{n\rightarrow\infty}{\varphi_n(x)}=f(x)\quad\text{for all}\quad x\in\BR^d.\]
+    \[|\varphi_n(x)|\leq |\varphi_{n+1}(x)|\quad\text{and}\quad \lim_{n\rightarrow\infty}{\varphi_n(x)}=f(x)\quad\text{for all}\quad x\in\BR^d.\]
 \end{tcolorbox}
 \begin{proof}
+    Let $f^+(x)=\max(f(x),0)$ and $f^{-}(x)=\max(-f(x),0)$ so that 
     
+    \[f(x)=f^+(x)-f^-(x)\quad\text{for all}\quad x\in\BR^d.\]
+    \\
+    Since both $f^+$ and $f^-$ are nonnegative measurable functions on $\BR^d$, by Theorem \hyperref[Theorem 1.4.7]{1.4.7}, there exist two sequences $\{\phi_n\}_{n=1}^{\infty}$ and $\{\psi_n\}_{n=1}^{\infty}$ which converge pointwise to $f^+$ and $f^-$, respectively. Let $\varphi_n\coloneqq\phi_n-\psi_n$ for all $n\in\BZ^+$. Then $\varphi_n$ converges pointwise to $f$, and the sequence $\{|\varphi_n|\}_{n=1}^{\infty}$ increases monotonically. 
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=red!75!black,title=Theorem 1.4.9 (Egorov's Theorem)]\label{Theorem 1.4.9}
-    Let $\{f_k\}_{k=1}^{\infty}$ be a sequence of measurable functions defined on a measurable set $E$ with $m(E)<\infty$. If $f_k\rightarrow f$ a.e., then for any $\epsilon>0$, there exist a closed set $A\subseteq E$ such that $m(E-A)<\epsilon$ and $f_k\rightrightarrows f$ on $A$ (i.e. $f_k$ converges to $f$ uniformly on $A$).
+    Let $\{f_k\}_{k=1}^{\infty}$ be a sequence of measurable functions defined on a measurable set $E$ with $m(E)<\infty$. If $f_k\rightarrow f$ a.e, then for any $\epsilon>0$, there exist a closed set $A\subseteq E$ such that $m(E-A)<\epsilon$ and $f_k\rightrightarrows f$ on $A$ (i.e. $f_k$ converges to $f$ uniformly on $A$).
 \end{tcolorbox}
 \begin{proof}
+    Let $E^*$ be the set of $x\in E$ such that $f_k(x)$ does not converges to $f(x)$. Since $f_k\rightarrow f$ a.e, we have $m(E^*)=0$. Let $E_0=E\setminus E^*$ so that $m(E_0)=m(E)$.
+
+    For any $n, k\geq 1$, let 
+
+    \[E_k^n\coloneqq\left\{x\in E_0\ \Big|\ |f_j(x)-f(x)|<\frac{1}{n}\ \text{for all}\ j>k\right\}\]
+    \\
+    Then, for each $n$, $E_k^n\nearrow E_0$ as $k\rightarrow\infty$ since $f_j\rightarrow f$ on $E_0$. Since we have $m(E_0)<\infty$, by Corollary \hyperref[Corollary 1.3.4]{1.3.4}, $\lim_{n\rightarrow\infty}{m(E_k^n)}=m(E_0)$, that is, 
+
+    \[m(E_0-E_k^n)\rightarrow 0\quad\text{as}\quad n\rightarrow\infty.\]
+    \\
+    Hence, there exists $k_n\in\BZ^+$ such that 
     
+    \[m(E_0-E_{k_n}^n)<\frac{1}{2^n}.\]
+    \\
+    For given $\epsilon>0$, there is a positive integer $N$ such that $\sum_{n=N}^{\infty}{1/2^n}<\epsilon/2$. Let 
+
+    \[A_\epsilon\coloneqq\bigcap_{n=N}^{\infty}{E_{k_n}^n}.\]
+    \\
+    Then, for any $\delta>0$, we can find $n\geq N$ such that $1/n<\delta$; therefore, 
+
+    \[|f_j(x)-f(x)|<\frac{1}{n}<\delta\quad\text{for all}\quad j>k_n.\]
+    \\
+    This proves that $f_j\rightrightarrows f$ on $A_\epsilon$. Moreover, 
+
+    \[m(E_0-A_\epsilon)\leq \sum_{n=N}^{\infty}{m(E_0-E_{k_n}^n)}<\sum_{n=N}^{\infty}{\frac{1}{2^n}}<\frac{\epsilon}{2}.\]
+    \\
+    \indent Lastly, recall that there exists a closed $A\subseteq A_\epsilon$ such that $m(A_\epsilon-A)<\epsilon/2$; thus
+    
+    \[m(E-A)=m(E_0-A)= m(E-A_\epsilon)+m(A_\epsilon-A)<\epsilon.\]
+    \\
+    On this closed set $A\subseteq E$, the sequence $\{f_k\}_{k=1}^{\infty}$ still converges to $f$ uniformly. 
 \end{proof}
 \vspace{5mm}
 \begin{tcolorbox}[colback=yellow!10!white,colframe=blue!75!black,title=Definition 1.4.5]\label{Definition 1.4.5}
@@ -1201,7 +1251,27 @@ As we mentioned before, measurable functions can be approximated by step functio
     If $f$ is a measurable function on $\BR^d$, then there exists a sequence of step functions $\{\varphi_n\}_{n=1}^{\infty}$ such that $\varphi_n\rightarrow f$ a.e. 
 \end{tcolorbox}
 \begin{proof}
+    Since any measurable function $f$ can be approximated by simple function on $\BR^d$, it suffices to prove that $f=\chi_{E}$, where $E$ is measurable with finite measure, can be approximated by step function a.e. Recall that, for any $\epsilon>0$, there exists almost disjoint closed rectangles $\{Q_j\}_{j=1}^{N}$ such that 
+
+    \[m\left(E\triangle \bigcup_{j=1}^{N}{Q_j}\right)<\epsilon.\]
+    \\
+    For each rectangle $Q_j$, we can find slightly smaller rectangle $R_j$ so that $R_j\subset Q_j$ and 
+
+    \[m\left(E\triangle \bigcup_{j=1}^{N}{R_j}\right)<2\epsilon.\]
+    \\
+    Therefore, we have
+
+    \[m\left(\left\{x\in\BR^d\ \Big|\ f(x)=\sum_{j=1}^{N}{\chi_{R_j}}\right\}\right)<2\epsilon.\]
+    \\
+    \indent From the above observation, we checked that, there exists a sequence $\{\varphi_n\}_{n=1}^\infty$ of step functions such that
     
+    \[m(\{x\mid f(x)\neq\varphi_n(x)\})<\frac{1}{2^n}\]
+    \\
+    for all $n\in\BZ^+$. Let $E_n\coloneqq \{x\mid f(x)\neq \varphi_n(x)\}$ and $F\coloneqq\limsup_{n\rightarrow\infty}{E_n}=\bigcap_{n=1}^{\infty}{\bigcup_{k=n+1}^\infty{E_k}}$, then we have $m(F)=0$ because
+
+    \[m\left(\bigcup_{k=n+1}^{\infty}{E_k}\right)\leq\sum_{n+1}^{\infty}{m(E_j)}\leq\frac{1}{2^n}.\]
+    \\
+    Therefore, we get $\varphi_n\rightarrow f$ on $F^c$, that is, there exists a sequence of step functions $\{\varphi_n\}_{n=1}^{\infty}$ that converges to $f$ a.e.
 \end{proof}
 \vspace{5mm}
 
@@ -1217,7 +1287,15 @@ Note that the conclusion of the theorem means that the restriction of $f$ to the
 
 \vspace{5mm}
 \begin{proof}
+    Let $\{f_n\}_{n=1}^{\infty}$ be a sequence of step functions such that $f_n\rightarrow f$ a.e, which exists by Theorem \hyperref[Theorem 1.4.10]{1.4.10}. By Egorov's Theorem (Theorem \hyperref[Theorem 1.4.9]{1.4.9}), there exists a closed set $A$ in $E$ such that $m(E-A)<\epsilon/3$ and $f_n\rightrightarrows f$ on $A$. Since each $f_n$ is a step function, we can find the measurable sets $E_n$ so that $m(E_n)<1/2^n$ and $f_n$ is continuous on $E_n^c$. Take large enough $N>0$ so that $\sum_{n=N}^{\infty}{1/2^n}<\epsilon/3$. Then, for every $n\geq N$, the function $f_n$ is continuous on $A-\bigcup_{n=N}^{\infty}{E_n}$. Hence the fact that 
     
+    \[f_n\rightrightarrows f\quad\text{on}\quad A-\bigcup_{n=N}^{\infty}{E_n}\]
+    \\
+    implies that $f$ is also continuous on the same set. Lastly, since we can find a closed set $F\subseteq A-\bigcup_{n=N}^{\infty}{E_n}$ such that
+
+    \[m\left(\left(A-\bigcup_{n=N}^{\infty}{E_n}\right)-F\right)<\frac{\epsilon}{3},\]
+    \\
+    this completes the proof.
 \end{proof}
 \vspace{5mm}
 
